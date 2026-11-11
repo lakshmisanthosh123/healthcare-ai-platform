@@ -1,0 +1,53 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Healthcare: Django (8001)",
+			"type": "shell",
+			"command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File backend\\run_with_postgres.ps1 -Service django",
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Healthcare: FastAPI (8000)",
+			"type": "shell",
+			"command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File backend\\run_with_postgres.ps1 -Service fastapi",
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Healthcare: Inspect PostgreSQL",
+			"type": "shell",
+			"command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File backend\\run_with_postgres.ps1 -Service inspect",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Healthcare: Apply database migrations",
+			"type": "shell",
+			"command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File backend\\run_with_postgres.ps1 -Service migrate",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Healthcare: Frontend",
+			"type": "shell",
+			"command": "pnpm dev",
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Healthcare: Connect and Inspect PostgreSQL",
+			"type": "shell",
+			"command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File backend\\run_with_postgres.ps1 -Service inspect",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

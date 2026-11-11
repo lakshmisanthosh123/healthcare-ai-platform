@@ -1,0 +1,33 @@
+.ui-search {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.ui-search__input {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  flex: 1;
+  font-size: 14px;
+  padding: 10px 12px;
+}
+
+.ui-search__input:focus {
+  border-color: #0b6efd;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.ui-search__button {
+  background-color: #0b6efd;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 16px;
+}
+
+.ui-search__button:hover {
+  background-color: #0958d1;
+}

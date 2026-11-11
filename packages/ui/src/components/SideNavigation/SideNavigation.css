@@ -1,0 +1,17 @@
+.ui-side-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 260px;
+  min-width: 220px;
+  padding: 1rem;
+  background-color: var(--ui-surface);
+  border-right: 1px solid var(--ui-border);
+}
+
+.ui-side-navigation__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}

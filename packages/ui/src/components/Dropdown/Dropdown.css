@@ -1,0 +1,23 @@
+.ui-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ui-dropdown__label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ui-dropdown__select {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px 12px;
+}
+
+.ui-dropdown__select:focus {
+  border-color: #0b6efd;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}

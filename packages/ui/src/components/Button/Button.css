@@ -1,0 +1,44 @@
+.ui-button {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.ui-button--primary {
+  background-color: #0b6efd;
+  color: #fff;
+}
+
+.ui-button--primary:hover:not(:disabled) {
+  background-color: #0958d1;
+}
+
+.ui-button--secondary {
+  background-color: #e6e6e6;
+  color: #1f2937;
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  background-color: #d4d4d4;
+}
+
+.ui-button--danger {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.ui-button--danger:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.ui-button--full {
+  width: 100%;
+}
+
+.ui-button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}

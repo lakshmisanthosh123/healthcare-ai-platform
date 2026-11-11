@@ -1,0 +1,14 @@
+.ui-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: var(--ui-surface);
+  border-top: 1px solid var(--ui-border);
+}
+
+.ui-footer__links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

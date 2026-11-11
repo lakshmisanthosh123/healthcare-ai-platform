@@ -1,0 +1,29 @@
+.ui-textfield {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ui-textfield__label {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ui-textfield__input {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 12px;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.ui-textfield__input--error {
+  border-color: #dc2626;
+}
+
+.ui-textfield__error {
+  color: #dc2626;
+  font-size: 12px;
+}

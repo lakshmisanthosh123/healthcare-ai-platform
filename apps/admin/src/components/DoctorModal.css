@@ -1,0 +1,91 @@
+.admin-doctor-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-doctor-form label {
+  display: grid;
+  min-width: 0;
+  gap: 0.4rem;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.admin-doctor-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.admin-doctor-form input:not([type="checkbox"]),
+.admin-doctor-form select,
+.admin-doctor-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #0f172a;
+  font: inherit;
+}
+
+.admin-doctor-form input:not([type="checkbox"]):focus,
+.admin-doctor-form select:focus,
+.admin-doctor-form textarea:focus {
+  border-color: #2563eb;
+  outline: 3px solid rgb(37 99 235 / 16%);
+}
+
+.admin-doctor-form textarea {
+  resize: vertical;
+}
+
+.admin-doctor-form__languages {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.admin-doctor-form__languages legend {
+  margin-bottom: 0.5rem;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.admin-doctor-form__language-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+.admin-doctor-form__language-options label,
+.admin-doctor-form__active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-doctor-form__language-options input,
+.admin-doctor-form__active input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: #2563eb;
+}
+
+.admin-doctor-form__error {
+  margin: 0;
+  color: #b42318;
+}
+
+@media (max-width: 600px) {
+  .admin-doctor-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

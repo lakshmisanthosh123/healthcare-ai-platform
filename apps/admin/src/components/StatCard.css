@@ -1,0 +1,28 @@
+.stat-card {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.stat-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-card__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.stat-card__value {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.stat-card__detail {
+  margin: 0;
+  color: #64748b;
+}

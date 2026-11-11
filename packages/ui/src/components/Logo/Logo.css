@@ -1,0 +1,15 @@
+.ui-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ui-logo__image {
+  height: 2rem;
+  width: auto;
+}
+
+.ui-logo__text {
+  font-weight: 700;
+  font-size: 1rem;
+}

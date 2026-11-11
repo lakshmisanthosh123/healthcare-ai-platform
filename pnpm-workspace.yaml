@@ -1,0 +1,5 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+patchedDependencies:
+  "@originjs/vite-plugin-federation@1.4.1": patches/@originjs__vite-plugin-federation@1.4.1.patch

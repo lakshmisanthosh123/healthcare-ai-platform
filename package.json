@@ -1,0 +1,38 @@
+{
+  "name": "healthcare-platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:backend": "node scripts/dev.mjs --backend-only",
+    "build": "turbo build",
+    "lint": "eslint --no-config-lookup --config eslint.config.js apps packages scripts tests",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "turbo run typecheck",
+    "test:e2e": "playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.21.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "eslint": "^10.8.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "prettier": "^3.6.2",
+    "turbo": "^2.10.9",
+    "typescript-eslint": "^8.65.0"
+  }
+}

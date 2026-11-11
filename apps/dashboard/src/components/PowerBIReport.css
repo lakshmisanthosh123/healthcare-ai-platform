@@ -1,0 +1,66 @@
+.powerbi-report {
+  min-width: 0;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 4px 16px rgb(15 23 42 / 4%);
+}
+
+.powerbi-report__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.powerbi-report__header h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1rem;
+}
+
+.powerbi-report__header p {
+  margin: 0.3rem 0 0;
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.powerbi-report__frame {
+  display: block;
+  width: 100%;
+  min-height: 34rem;
+  border: 0;
+}
+
+.powerbi-report__error {
+  margin: 0 0 1rem;
+  color: #b91c1c;
+}
+
+.powerbi-report__retry {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #0f172a;
+  cursor: pointer;
+  font: inherit;
+}
+
+.powerbi-report__retry:hover {
+  background: #f8fafc;
+}
+
+@media (max-width: 600px) {
+  .powerbi-report {
+    padding: 1rem;
+  }
+
+  .powerbi-report__frame {
+    min-height: 26rem;
+  }
+}

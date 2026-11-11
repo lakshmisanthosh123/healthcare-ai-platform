@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+
+    "outDir": "./src/components/dist",
+
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false
+  },
+  "files": ["src/index.ts"],
+  "exclude": ["dist", "node_modules"]
+}

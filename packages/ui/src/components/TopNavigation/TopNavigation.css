@@ -1,0 +1,16 @@
+.ui-top-navigation {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--ui-surface);
+  border-bottom: 1px solid var(--ui-border);
+}
+
+.ui-top-navigation__menu,
+.ui-top-navigation__actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}

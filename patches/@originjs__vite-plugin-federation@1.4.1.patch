@@ -1,0 +1,26 @@
+diff --git a/dist/index.js b/dist/index.js
+index 13056b163a207cfbddea5e397c215c60455a19c7..49fa58efa4a3dcfb3e0e27e67f30db65bd7b425f 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1261,7 +1261,7 @@ function prodExposePlugin(options) {
+           return res;
+         }, /* @__PURE__ */ new Map());
+         remoteEntryChunk.code = remoteEntryChunk.code.replace(
+-          new RegExp(`(["'])${DYNAMIC_LOADING_CSS_PREFIX}.*?\\1`, "g"),
++          new RegExp(`(["'\x60])${DYNAMIC_LOADING_CSS_PREFIX}.*?\\1`, "g"),
+           (str) => {
+             if (viteConfigResolved.config && !viteConfigResolved.config.build.cssCodeSplit) {
+               if (cssBundlesMap.size) {
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 960932ec6cea3bdb300496b6edec5c907ce679ab..a33bd5edac66ec3f13ca4cdafcc32b5078780ab4 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1244,7 +1244,7 @@ function prodExposePlugin(options) {
+           return res;
+         }, /* @__PURE__ */ new Map());
+         remoteEntryChunk.code = remoteEntryChunk.code.replace(
+-          new RegExp(`(["'])${DYNAMIC_LOADING_CSS_PREFIX}.*?\\1`, "g"),
++          new RegExp(`(["'\x60])${DYNAMIC_LOADING_CSS_PREFIX}.*?\\1`, "g"),
+           (str) => {
+             if (viteConfigResolved.config && !viteConfigResolved.config.build.cssCodeSplit) {
+               if (cssBundlesMap.size) {

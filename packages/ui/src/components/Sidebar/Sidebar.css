@@ -1,0 +1,24 @@
+.ui-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 260px;
+  min-width: 220px;
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--ui-surface);
+  border-right: 1px solid var(--ui-border);
+}
+
+.ui-sidebar__header,
+.ui-sidebar__footer {
+  padding: 0.5rem 0;
+}
+
+.ui-sidebar__content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}

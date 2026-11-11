@@ -1,0 +1,244 @@
+/* Prescription Page */
+.prescription-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.prescription-container {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+
+.patient-selector {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.patient-selector h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.patient-select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.patient-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.prescription-actions {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.prescription-form-section {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border-left: 4px solid #667eea;
+}
+
+.prescription-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-header {
+  margin-bottom: 16px;
+}
+
+.form-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+.medications-section h4 {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.medication-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  align-items: flex-end;
+}
+
+.medication-row .form-group {
+  margin-bottom: 0;
+}
+
+.medication-row .form-group label {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.medication-row .form-group input,
+.medication-row .form-group select {
+  font-size: 13px;
+  padding: 8px 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.prescriptions-list h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+.prescriptions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.prescription-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.prescription-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.prescription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.prescription-header h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.prescription-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.medications-list h5 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #333;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.medication-item {
+  font-size: 13px;
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.medication-item strong {
+  color: #667eea;
+}
+
+.prescription-instructions {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f0f0ff;
+  border-radius: 4px;
+  border-left: 3px solid #667eea;
+}
+
+.prescription-instructions strong {
+  color: #667eea;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.prescription-instructions p {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.prescription-actions-card {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+@media (max-width: 1024px) {
+  .medication-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .prescriptions-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .prescription-page {
+    padding: 16px;
+  }
+
+  .prescription-container {
+    padding: 16px;
+  }
+
+  .medication-row {
+    grid-template-columns: 1fr;
+  }
+
+  .prescriptions-grid {
+    grid-template-columns: 1fr;
+  }
+}

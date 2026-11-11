@@ -1,0 +1,117 @@
+.account-menu {
+  position: relative;
+}
+
+.account-menu__trigger {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.2rem;
+  place-items: center;
+  border: 1px solid var(--portal-border, #e2e8f0);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.account-menu__trigger:focus-visible,
+.account-menu__panel a:focus-visible,
+.account-menu__panel button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.account-menu__avatar {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.account-menu__panel {
+  position: absolute;
+  inset-block-start: calc(100% + 0.55rem);
+  inset-inline-end: 0;
+  z-index: 40;
+  display: grid;
+  width: min(16rem, calc(100vw - 1.5rem));
+  padding: 0.4rem;
+  border: 1px solid var(--portal-border, #e2e8f0);
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 0.75rem 2rem rgb(23 43 77 / 16%);
+}
+
+.account-menu__identity {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.7rem 0.75rem;
+  overflow: hidden;
+}
+
+.account-menu__identity strong,
+.account-menu__identity span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-menu__identity strong {
+  color: var(--portal-ink, #172b4d);
+  font-size: 0.9rem;
+}
+
+.account-menu__identity span {
+  color: var(--portal-muted, #65758b);
+  font-size: 0.78rem;
+}
+
+.account-menu__panel a,
+.account-menu__panel button {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 0.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--portal-ink, #172b4d);
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.account-menu__panel a:hover,
+.account-menu__panel button:hover {
+  background: #f1f5fb;
+}
+
+.account-menu__panel button {
+  color: #b42318;
+}
+
+.account-menu__panel button[aria-expanded],
+.account-menu__languages button {
+  color: var(--portal-ink, #172b4d);
+}
+
+.account-menu__languages {
+  display: grid;
+  margin-inline-start: 0.75rem;
+  padding-inline-start: 0.4rem;
+  border-inline-start: 2px solid var(--portal-border, #e2e8f0);
+}
+
+.account-menu__languages button[aria-pressed="true"] {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.account-menu__languages button:hover {
+  background: #f1f5fb;
+}
