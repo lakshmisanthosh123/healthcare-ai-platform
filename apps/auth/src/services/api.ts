@@ -14,7 +14,7 @@ export const api = axios.create({
     (import.meta.env.PROD
       ? "https://healthcare-django-api.onrender.com"
       : "http://127.0.0.1:8001"),
-  timeout: 10000,
+  timeout: 60000,
 });
 
 export interface StoredSession {

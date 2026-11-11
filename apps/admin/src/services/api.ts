@@ -6,7 +6,7 @@ export const adminApi = axios.create({
     (import.meta.env.PROD
       ? "https://healthcare-django-api.onrender.com/api"
       : "http://localhost:8001/api"),
-  timeout: 10000,
+  timeout: 60000,
 });
 
 export function getAdminApiErrorMessage(
