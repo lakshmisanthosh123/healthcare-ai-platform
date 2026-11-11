@@ -10,6 +10,19 @@ learning order:
 
 - [Backend learning guide](LEARNING_GUIDE.md)
 
+## Deployment
+
+The root `render.yaml` Blueprint provisions Django, FastAPI, and a shared
+PostgreSQL database on Render. Apply the Blueprint from the Render dashboard;
+enter the Netlify site origin for `CORS_ALLOWED_ORIGINS` on both API services.
+The Blueprint uses free plans, which have limited resources and availability;
+review Render's current plan and database-retention terms before deploying.
+
+The root `netlify.toml` builds the shell and all six federated modules into one
+Netlify site. Set `NETLIFY_DJANGO_API_URL` and `NETLIFY_FASTAPI_API_URL` in the
+Netlify site environment to the deployed Render service URLs if they differ
+from the default service names in `scripts/build-netlify.mjs`.
+
 ## Current API areas
 
 - Django: health, register/login, profile, logout, OTP password reset, admin users,

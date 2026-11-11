@@ -1,0 +1,86 @@
+databases:
+  - name: healthcare-postgres
+    databaseName: healthcare_platform
+    user: healthcare_platform
+    plan: free
+    region: oregon
+
+services:
+  - type: web
+    name: healthcare-django-api
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r backend/django/requirements.txt
+    startCommand: python backend/django/manage.py migrate --noinput && python backend/django/manage.py collectstatic --noinput && gunicorn --chdir backend/django config.wsgi:application --bind 0.0.0.0:$PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: PGHOST
+        fromDatabase:
+          name: healthcare-postgres
+          property: host
+      - key: PGPORT
+        fromDatabase:
+          name: healthcare-postgres
+          property: port
+      - key: PGDATABASE
+        fromDatabase:
+          name: healthcare-postgres
+          property: database
+      - key: PGUSER
+        fromDatabase:
+          name: healthcare-postgres
+          property: user
+      - key: PGPASSWORD
+        fromDatabase:
+          name: healthcare-postgres
+          property: password
+
+  - type: web
+    name: healthcare-fastapi-api
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r backend/fastapi/requirements.txt
+    startCommand: uvicorn backend.fastapi.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        fromService:
+          name: healthcare-django-api
+          type: web
+          envVarKey: SECRET_KEY
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: PGHOST
+        fromDatabase:
+          name: healthcare-postgres
+          property: host
+      - key: PGPORT
+        fromDatabase:
+          name: healthcare-postgres
+          property: port
+      - key: PGDATABASE
+        fromDatabase:
+          name: healthcare-postgres
+          property: database
+      - key: PGUSER
+        fromDatabase:
+          name: healthcare-postgres
+          property: user
+      - key: PGPASSWORD
+        fromDatabase:
+          name: healthcare-postgres
+          property: password

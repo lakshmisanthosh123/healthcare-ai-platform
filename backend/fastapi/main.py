@@ -24,7 +24,11 @@ from .routers import api_router, dashboard_router
 app = FastAPI(title="Healthcare Platform API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"http://localhost:\d+",
+    allow_origins=django_settings.CORS_ALLOWED_ORIGINS,
+    allow_origin_regex=os.environ.get(
+        "CORS_ALLOW_ORIGIN_REGEX",
+        r"http://localhost:\d+",
+    ),
     allow_methods=["*"],
     allow_headers=["*"],
 )
