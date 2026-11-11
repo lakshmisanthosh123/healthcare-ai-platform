@@ -144,6 +144,9 @@ def admin_dispatch(request, route: str) -> JsonResponse:
             })
         return JsonResponse(rows, safe=False)
 
+    if route == "users" and method == "POST":
+        return _create_role_account(body, "admin", user)
+
     if route == "patients" and method == "GET":
         return JsonResponse([
             {
@@ -404,7 +407,17 @@ def _create_role_account(body, role, actor):
     )
     group, _ = Group.objects.get_or_create(name=role)
     account.groups.add(group)
-    if role == "doctor":
+    if role == "admin":
+        data = {
+            "id": str(account.pk),
+            "username": account.get_full_name() or account.username,
+            "email": account.email,
+            "role": "admin",
+            "status": "Active",
+            "lastLogin": "",
+            "department": "",
+        }
+    elif role == "doctor":
         profile, _ = DoctorProfile.objects.get_or_create(user=account)
         _update_doctor(profile, body)
         data = _doctor_data(profile)

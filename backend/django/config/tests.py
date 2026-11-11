@@ -216,6 +216,61 @@ class AuthenticationFlowTests(TransactionTestCase):
         staff_profile.user.refresh_from_db()
         self.assertFalse(staff_profile.user.is_active)
 
+    def test_admin_can_create_an_admin_account_that_can_sign_in(self):
+        response = self.client.post(
+            "/api/admin/users",
+            data=json.dumps({
+                "firstName": "Casey",
+                "lastName": "Admin",
+                "email": "casey.admin@example.com",
+                "password": "TemporaryPassword123!",
+            }),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 401)
+
+        creator = get_user_model().objects.create_superuser(
+            username="creator@example.com",
+            email="creator@example.com",
+            password="StrongDemoPassword123!",
+        )
+        creator_token = _make_token(creator)
+        headers = {"Authorization": f"Bearer {creator_token}"}
+        created = self.client.post(
+            "/api/admin/users",
+            data=json.dumps({
+                "firstName": "Casey",
+                "lastName": "Admin",
+                "email": "casey.admin@example.com",
+                "password": "TemporaryPassword123!",
+            }),
+            content_type="application/json",
+            headers=headers,
+        )
+        self.assertEqual(created.status_code, 201, created.content)
+        self.assertEqual(created.json()["role"], "admin")
+        self.assertEqual(created.json()["username"], "Casey Admin")
+
+        login = self.client.post(
+            "/auth/login",
+            data=json.dumps({
+                "email": "casey.admin@example.com",
+                "password": "TemporaryPassword123!",
+            }),
+            content_type="application/json",
+        )
+        self.assertEqual(login.status_code, 200, login.content)
+        self.assertEqual(login.json()["user"]["role"], "admin")
+
+        admin_headers = {
+            "Authorization": f"Bearer {login.json()['access_token']}",
+        }
+        users = self.client.get("/api/admin/users", headers=admin_headers)
+        self.assertEqual(users.status_code, 200, users.content)
+        self.assertTrue(
+            any(item["email"] == "casey.admin@example.com" for item in users.json())
+        )
+
     def test_demo_seed_command_is_repeatable(self):
         output = StringIO()
         call_command("seed_demo_data", stdout=output)

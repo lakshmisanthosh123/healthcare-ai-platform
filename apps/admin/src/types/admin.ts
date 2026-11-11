@@ -8,6 +8,13 @@ export interface NewStaffPayload extends Omit<Staff, "id"> {
   password: string;
 }
 
+export interface NewAdminUserPayload {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 export interface AdminUser {
   id: string;
   username: string;

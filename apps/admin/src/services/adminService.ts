@@ -6,6 +6,7 @@ import type {
   AdminSettings,
   AdminUser,
   AuditLog,
+  NewAdminUserPayload,
   NewDoctorPayload,
   NewStaffPayload,
   Permission,
@@ -13,6 +14,8 @@ import type {
 
 export const getAdminUsers = async () =>
   (await adminApi.get<AdminUser[]>("/admin/users")).data;
+export const createAdminUser = async (payload: NewAdminUserPayload) =>
+  (await adminApi.post<AdminUser>("/admin/users", payload)).data;
 export const deleteAdminUser = async (id: string) =>
   (await adminApi.delete(`/admin/users/${id}`)).data;
 export const getAdminPatients = async () =>

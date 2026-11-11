@@ -3,7 +3,9 @@ import { Button, PageHeader, Table } from "@healthcare-platform/ui";
 import type { Doctor, Patient, Staff } from "@healthcare-platform/types";
 import { DoctorModal } from "../components/DoctorModal";
 import { StaffModal } from "../components/StaffModal";
+import { AdminUserModal } from "../components/AdminUserModal";
 import {
+  createAdminUser,
   createDoctor,
   createStaff,
   deleteAdminStaff,
@@ -11,12 +13,19 @@ import {
   getAdminDoctors,
   getAdminPatients,
   getAdminStaff,
+  getAdminUsers,
   updateAdminStaff,
   updateDoctor,
 } from "../services/adminService";
-import type { NewDoctorPayload, NewStaffPayload } from "../types/admin";
+import { getAdminApiErrorMessage } from "../services/api";
+import type {
+  AdminUser,
+  NewAdminUserPayload,
+  NewDoctorPayload,
+  NewStaffPayload,
+} from "../types/admin";
 
-type ActiveTab = "patients" | "doctors" | "staff";
+type ActiveTab = "patients" | "doctors" | "staff" | "admins";
 type CsvValue = string | number | boolean | null | undefined;
 
 interface PatientRow extends Patient {
@@ -64,6 +73,8 @@ export function UsersPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [staff, setStaff] = useState<Staff[]>([]);
+  const [adminUsers, setAdminUsers] = useState<AdminUser[]>([]);
+  const [adminSearch, setAdminSearch] = useState("");
   const [patientSearch, setPatientSearch] = useState("");
   const [patientStatus, setPatientStatus] = useState("");
   const [doctorSearch, setDoctorSearch] = useState("");
@@ -73,6 +84,7 @@ export function UsersPage() {
   const [staffStatus, setStaffStatus] = useState("");
   const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
   const [isStaffModalOpen, setIsStaffModalOpen] = useState(false);
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const [editingDoctor, setEditingDoctor] = useState<Doctor | null>(null);
   const [editingStaff, setEditingStaff] = useState<Staff | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -87,7 +99,8 @@ export function UsersPage() {
       getAdminPatients(),
       getAdminDoctors(),
       getAdminStaff(),
-    ]).then(([patientResult, doctorResult, staffResult]) => {
+      getAdminUsers(),
+    ]).then(([patientResult, doctorResult, staffResult, adminResult]) => {
       if (!isCurrent) return;
       const failures: string[] = [];
 
@@ -108,6 +121,12 @@ export function UsersPage() {
       } else {
         console.error("Failed to load staff:", staffResult.reason);
         failures.push("staff");
+      }
+      if (adminResult.status === "fulfilled") {
+        setAdminUsers(adminResult.value);
+      } else {
+        console.error("Failed to load admin users:", adminResult.reason);
+        failures.push("admin users");
       }
       if (failures.length) {
         setErrorMessage(`Failed to load ${failures.join(", ")} records.`);
@@ -177,6 +196,17 @@ export function UsersPage() {
       );
     });
   }, [staff, staffSearch, staffDepartment, staffStatus]);
+
+  const filteredAdmins = useMemo(() => {
+    const query = adminSearch.trim().toLowerCase();
+    return adminUsers.filter(
+      (account) =>
+        account.role.toLowerCase() === "admin" &&
+        [account.username, account.email, account.id].some((value) =>
+          normalize(value).includes(query),
+        ),
+    );
+  }, [adminUsers, adminSearch]);
 
   const doctorSpecialties = useMemo(
     () =>
@@ -261,6 +291,28 @@ export function UsersPage() {
     } catch (error) {
       console.error("Failed to save staff member:", error);
       setErrorMessage("Failed to save staff member.");
+      throw error;
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleAdminSubmit = async (data: NewAdminUserPayload) => {
+    setIsSaving(true);
+    setErrorMessage("");
+    try {
+      const created = await createAdminUser(data);
+      setAdminUsers((current) => [created, ...current]);
+      setSuccessMessage(
+        "Admin account created. They can now sign in to the admin module with the email and temporary password.",
+      );
+      setIsAdminModalOpen(false);
+      window.setTimeout(() => setSuccessMessage(""), 5000);
+    } catch (error) {
+      console.error("Failed to create admin account:", error);
+      setErrorMessage(
+        getAdminApiErrorMessage(error, "Failed to create admin account."),
+      );
       throw error;
     } finally {
       setIsSaving(false);
@@ -451,7 +503,7 @@ export function UsersPage() {
           }}
         />
       </div>
-    ) : (
+    ) : activeTab === "staff" ? (
       <div className="admin-users__actions">
         <Button
           label="Export Staff"
@@ -468,13 +520,19 @@ export function UsersPage() {
           }}
         />
       </div>
+    ) : (
+      <Button
+        label="Create Admin"
+        variant="primary"
+        onClick={() => setIsAdminModalOpen(true)}
+      />
     );
 
   return (
     <section className="admin-page">
       <PageHeader
-        title="Patients, Doctors & Staff"
-        subtitle="View, search, filter, and export each directory separately."
+        title="User Management"
+        subtitle="Manage patient, doctor, staff, and administrator accounts."
         actions={actions}
       />
       <div className="admin-content__body">
@@ -494,7 +552,7 @@ export function UsersPage() {
           role="tablist"
           aria-label="Directories"
         >
-          {(["patients", "doctors", "staff"] as const).map((tab) => (
+          {(["patients", "doctors", "staff", "admins"] as const).map((tab) => (
             <button
               key={tab}
               id={`admin-${tab}-tab`}
@@ -505,7 +563,7 @@ export function UsersPage() {
               className={activeTab === tab ? "is-active" : ""}
               onClick={() => setActiveTab(tab)}
             >
-              {tab[0].toUpperCase() + tab.slice(1)}
+              {tab === "admins" ? "Admins" : tab[0].toUpperCase() + tab.slice(1)}
             </button>
           ))}
         </div>
@@ -629,7 +687,7 @@ export function UsersPage() {
                 />
               )}
             </div>
-          ) : (
+          ) : activeTab === "staff" ? (
             <div className="admin-page-card">
               <div className="admin-users__filters">
                 <label>
@@ -719,6 +777,33 @@ export function UsersPage() {
                 />
               )}
             </div>
+          ) : (
+            <div className="admin-page-card">
+              <div className="admin-users__filters">
+                <label>
+                  Search admins
+                  <input
+                    type="search"
+                    value={adminSearch}
+                    onChange={(event) => setAdminSearch(event.target.value)}
+                    placeholder="Name, email, or ID"
+                  />
+                </label>
+              </div>
+              {isLoading ? (
+                <p role="status">Loading admins...</p>
+              ) : (
+                <Table
+                  columns={[
+                    { header: "Name", key: "username" },
+                    { header: "Email", key: "email" },
+                    { header: "Status", key: "status" },
+                    { header: "Last login", key: "lastLogin" },
+                  ]}
+                  data={filteredAdmins}
+                />
+              )}
+            </div>
           )}
         </section>
 
@@ -741,6 +826,12 @@ export function UsersPage() {
             setEditingStaff(null);
           }}
           onSubmit={handleStaffSubmit}
+        />
+        <AdminUserModal
+          isOpen={isAdminModalOpen}
+          loading={isSaving}
+          onClose={() => setIsAdminModalOpen(false)}
+          onSubmit={handleAdminSubmit}
         />
       </div>
     </section>
