@@ -11,7 +11,10 @@ import { getStoredAccessToken } from "@healthcare-platform/utils";
 
 const client = axios.create({
   baseURL:
-    import.meta.env.VITE_DASHBOARD_API_URL ?? "http://localhost:8000/dashboard",
+    import.meta.env.VITE_DASHBOARD_API_URL ??
+    (import.meta.env.PROD
+      ? "https://healthcare-fastapi-api.onrender.com/dashboard"
+      : "http://localhost:8000/dashboard"),
   timeout: 10000,
 });
 

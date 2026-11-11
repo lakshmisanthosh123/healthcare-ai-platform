@@ -9,7 +9,11 @@ import {
 import type { AuthUser } from "../types/auth";
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? "http://127.0.0.1:8001",
+  baseURL:
+    import.meta.env.VITE_API_URL ??
+    (import.meta.env.PROD
+      ? "https://healthcare-django-api.onrender.com"
+      : "http://127.0.0.1:8001"),
   timeout: 10000,
 });
 

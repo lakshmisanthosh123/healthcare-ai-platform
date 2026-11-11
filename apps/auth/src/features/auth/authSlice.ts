@@ -90,7 +90,7 @@ export const register = createAsyncThunk(
     } catch (error) {
       if (axios.isAxiosError(error) && !error.response) {
         return rejectWithValue(
-          "Cannot reach the account server at 127.0.0.1:8001. Start it with pnpm dev:backend.",
+          "Cannot reach the account server. Check your connection and try again.",
         );
       }
       const detail = axios.isAxiosError<{ detail?: unknown }>(error)

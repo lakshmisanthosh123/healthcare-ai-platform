@@ -48,7 +48,7 @@ export function LoginPage() {
       }
 
       const shellUrl =
-        import.meta.env.VITE_SHELL_URL ?? "http://localhost:3000/";
+        import.meta.env.VITE_SHELL_URL ?? `${window.location.origin}/`;
       window.location.assign(new URL(modulePath, shellUrl).toString());
     } catch (error) {
       const message =

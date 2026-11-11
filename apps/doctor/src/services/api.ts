@@ -3,7 +3,11 @@ import axios from "axios";
 const tokenKey = "access_token";
 
 export const doctorApi = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000/api",
+  baseURL:
+    import.meta.env.VITE_API_BASE_URL ??
+    (import.meta.env.PROD
+      ? "https://healthcare-fastapi-api.onrender.com/api"
+      : "http://localhost:8000/api"),
   timeout: 10000,
 });
 

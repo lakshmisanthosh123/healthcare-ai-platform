@@ -100,7 +100,9 @@ CORS_ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
     if origin.strip()
-] + [f"http://localhost:{port}" for port in range(3000, 3007)]
+] + ["https://heacarehub.netlify.app"] + [
+    f"http://localhost:{port}" for port in range(3000, 3007)
+]
 EMAIL_BACKEND = os.environ.get(
     "EMAIL_BACKEND",
     "django.core.mail.backends.console.EmailBackend",

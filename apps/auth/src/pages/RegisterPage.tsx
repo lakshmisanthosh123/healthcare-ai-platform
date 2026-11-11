@@ -55,7 +55,7 @@ export function RegisterPage() {
     try {
       await dispatch(register(result.data)).unwrap();
       window.location.assign(
-        import.meta.env.VITE_SHELL_URL ?? "http://localhost:3000/",
+        import.meta.env.VITE_SHELL_URL ?? `${window.location.origin}/`,
       );
     } catch (error) {
       const message =
